@@ -1,3 +1,5 @@
+import {CHANGE_INPUT, ADD_ITEM ,DELETE_ITEM} from './actionTypes'
+
 // 存放state初始化的一些数据
 const defaultState = {
     inputValue: 'Write somthing',
@@ -11,20 +13,20 @@ const defaultState = {
 export default (state = defaultState, action) => {
     console.log(state, action)
     // Reducer里只能接受state，只能改变state
-    if(action.type === 'changeInput') {
+    if(action.type === CHANGE_INPUT) {
         let newState = JSON.parse(JSON.stringify(state))
         newState.inputValue = action.value
         return newState
     }
-    if (action.type === 'addItem') {
+    if (action.type === ADD_ITEM) {
         let newState = JSON.parse(JSON.stringify(state))
         newState.list = [...newState.list, newState.inputValue]
         newState.inputValue = ''
         return newState
     }
-    if (action.type === 'deleteItem') {
+    if (action.type === DELETE_ITEM) {
         let newState = JSON.parse(JSON.stringify(state))
-        newState.list.splice(action.value, 1)
+        newState.list.splice(action.index, 1)
         return newState
     }
     return state

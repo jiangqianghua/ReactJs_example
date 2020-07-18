@@ -4,6 +4,8 @@ import {Input, Button, List} from 'antd'
 // import store from './store/index'
 import store from './store'
 
+import {changeInputAction, addItemAction, delItemAction} from './store/actionCreators'
+
 class TodoList extends Component {
     state = {  }
     constructor(props) {
@@ -51,25 +53,17 @@ class TodoList extends Component {
 
     changeInputValue(e) {
         console.log(e.target.value)
-        const action = {
-            type: 'changeInput',
-            value: e.target.value
-        }
+        const action = changeInputAction(e.target.value)
         store.dispatch(action)
     }
 
     clickBtn () {
-        const action = {
-            type: 'addItem'
-        }
+        const action = addItemAction()
         store.dispatch(action)
     }
 
     deleteItem(index) {
-        const action = {
-            type: 'deleteItem',
-            value: index
-        }
+        const action = delItemAction(index)
         store.dispatch(action)
     }
 }
