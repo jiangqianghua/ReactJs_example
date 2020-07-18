@@ -1,74 +1,65 @@
 import React, { Component } from 'react';
-import 'antd/dist/antd.css'
-import {Input, Button, List} from 'antd'
-// import store from './store/index'
-import store from './store'
-
-import MyUI from './MyUI'
-
-import {changeInputAction, addItemAction, delItemAction} from './store/actionCreators'
+import {connect} from 'react-redux'
 
 class TodoList extends Component {
-    state = {  }
-    constructor(props) {
-        super(props)
-        this.state = store.getState()
-        this.changeInputValue = this.changeInputValue.bind(this)
-        this.clickBtn = this.clickBtn.bind(this)
-        // 订阅store改变事件，把新的state设置到当前state
-        this.storeChange = this.storeChange.bind(this)
-        store.subscribe(this.storeChange)
-    }
-
-    // 重新设置state
-    storeChange () {
-        console.log('storeChange')
-        this.setState(store.getState())
-    }
-
     render() { 
         return ( 
-            <div style={{margin: '10px'}}>
+            <div>
                 <div>
-                    <Input 
-                    style={{width: '250px', marginRight: '10px'}} 
-                    onChange={this.changeInputValue}
-                    value={this.state.inputValue}
-                    />
+                    <input
+                    value = {this.props.inputValue }
+                    onChange = {this.props.inputChange} />
+                    <button onClick={this.props.clickButton}>提交 </button>
 
-                    <Button type="primary" onClick={this.clickBtn} > 增加</Button>
                 </div>
                 <div>
-                    {this.state.inputValue}
+                    <ul>
+                        {
+                            this.props.list.map((item, index) => {
+                                return (
+                                <li key={index} onClick={this.props.delClick(index)}>{item}</li>
+                                )
+                            })
+                        }
+                    </ul>
                 </div>
-                <div style={{margin: '10px', width: '300px'}}>
-                    <List
-                        bordered
-                        dataSource={this.state.list}
-                        renderItem={(item, index) => (<List.Item 
-                            onClick={this.deleteItem.bind(this, index)}>{item}</List.Item>)}
-                    ></List>
-                </div>
-                <MyUI text="无状态的"></MyUI>
             </div>
          );
     }
 
-    changeInputValue(e) {
-        console.log(e.target.value)
-        const action = changeInputAction(e.target.value)
-        store.dispatch(action)
-    }
-
-    clickBtn () {
-        const action = addItemAction()
-        store.dispatch(action)
-    }
-
-    deleteItem(index) {
-        const action = delItemAction(index)
-        store.dispatch(action)
-    }
 }
  
-export default TodoList;
+const stateToProps = (state) => {
+    return {
+        inputValue: state.inputValue,
+        list: state.list
+    }
+}
+
+const dispatchToProps = (dispatch) => {
+    return {
+        inputChange(e) {
+            console.log('inputchange')
+            let action = {
+                type: 'changeInput',
+                value: e.target.value
+            }
+            dispatch(action)
+        },
+        clickButton(){
+            let action = {
+                type: 'addItem'
+            }
+            dispatch(action)
+        },
+        delClick (index) {
+            console.log('delclick')
+            let action = {
+                type: 'deleteItem',
+                index
+            }
+            dispatch(action)
+        }
+    }
+}
+export default connect(stateToProps, dispatchToProps)(TodoList);
