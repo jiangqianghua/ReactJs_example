@@ -1,4 +1,5 @@
 import React, {Component, Fragment} from 'react'
+import TodoItem from './TodoItem'
 
 class TodoList extends Component {
     constructor(pros) {
@@ -12,24 +13,27 @@ class TodoList extends Component {
         return (
             <Fragment>
                 <div>
-                    <input value={this.state.inputValue}
+                    <label htmlFor="input_id">请输入文本</label>
+                    <input id="input_id" value={this.state.inputValue}
                     onChange={this.inputChange.bind(this)}  /> 
                     <button onClick={this.addList.bind(this)}>增加服务器</button>
                 </div>
                 <ul>
                     {
                         this.state.list.map((item, index) => {
-                            return this.renderListItem(item, index) 
+                            return (
+                                <TodoItem
+                                 content={item} 
+                                 index={index}
+                                 key={index+item}
+                                 deleteItem={
+                                    this.deleteItem.bind(this)
+                                 }></TodoItem>
+                            )
                         })
                     }
                 </ul>
             </Fragment>
-        )
-    }
-
-    renderListItem(item, index){
-        return (
-            <li key={index}>{item}<button onClick={this.delList.bind(this, index)}>删除</button></li>
         )
     }
 
@@ -48,7 +52,7 @@ class TodoList extends Component {
             })
     }
 
-    delList(index) {
+    deleteItem(index) {
         // 一定要先定义局部变量在作删除
         let list = this.state.list
         list.splice(index, 1)
