@@ -4,6 +4,8 @@ import {Input, Button, List} from 'antd'
 // import store from './store/index'
 import store from './store'
 
+import MyUI from './MyUI'
+
 import {changeInputAction, addItemAction, delItemAction} from './store/actionCreators'
 
 class TodoList extends Component {
@@ -47,6 +49,7 @@ class TodoList extends Component {
                             onClick={this.deleteItem.bind(this, index)}>{item}</List.Item>)}
                     ></List>
                 </div>
+                <MyUI text="无状态的"></MyUI>
             </div>
          );
     }
