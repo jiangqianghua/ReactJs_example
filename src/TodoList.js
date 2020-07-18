@@ -1,5 +1,6 @@
 import React, {Component, Fragment} from 'react'
 import TodoItem from './TodoItem'
+import LiftSycle from './LifeCycle'
 
 class TodoList extends Component {
     constructor(pros) {
@@ -13,12 +14,14 @@ class TodoList extends Component {
         return (
             <Fragment>
                 <div>
+                    <LiftSycle></LiftSycle>
                     <label htmlFor="input_id">请输入文本</label>
                     <input id="input_id" value={this.state.inputValue}
-                    onChange={this.inputChange.bind(this)}  /> 
+                    onChange={this.inputChange.bind(this)}
+                    ref={(input) => {this.input=input}}  /> 
                     <button onClick={this.addList.bind(this)}>增加服务器</button>
                 </div>
-                <ul>
+                <ul ref={(ul) => {this.ul = ul}}>
                     {
                         this.state.list.map((item, index) => {
                             return (
@@ -40,7 +43,7 @@ class TodoList extends Component {
     inputChange(e) {
         console.log(e.target.value)
        this.setState({
-           inputValue: e.target.value
+           inputValue: this.input.value
        })
     }
 
@@ -49,6 +52,9 @@ class TodoList extends Component {
         this.setState({
                 list: [...this.state.list, this.state.inputValue],
                 inputValue: ''
+            }, () => {
+                // 渲染完成后会执行该方法
+                console.log(this.ul.querySelectorAll("li").length)
             })
     }
 
@@ -58,6 +64,9 @@ class TodoList extends Component {
         list.splice(index, 1)
         this.setState({
             list: list
+        },() => {
+            // 渲染完成后会执行该方法
+            console.log(this.ul.querySelectorAll("li").length)
         })
     }
 }

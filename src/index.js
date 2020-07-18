@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import TodoList from './TodoList'
+import LifeCycle from './LifeCycle'
+// import TodoList from './TodoList'
 
 ReactDOM.render(
-    <TodoList />,
+    <LifeCycle />,
     document.getElementById('root')
 )
