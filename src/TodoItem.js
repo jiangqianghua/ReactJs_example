@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types'
+import './css/anim.css'
 class TodoItem extends Component {
     constructor(props) {
         super(props)
@@ -8,7 +9,9 @@ class TodoItem extends Component {
     state = {  }
     render() { 
         return ( 
+           
             <li onClick={this.handleClick}>{this.props.content}</li>
+
          );
     }
     handleClick(){

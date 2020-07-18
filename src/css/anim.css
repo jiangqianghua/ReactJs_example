@@ -1,44 +1,28 @@
-.show {
-    animation: show-item 2s ease-in forwards;
+/* XXXX-动作 */
+/* 入场前 */
+.boss-text-enter{
+    opacity: 0;
+}
+/* 入场到入场结束 */
+.boss-text-enter-active{
+    opacity: 1; 
+    transition: opacity 2000ms;
+}
+/* 入场结束 */
+.boss-text-enter-done{
+    opacity: 1;
 }
 
-.hiden{
-    animation: hide-item 2s ease-in forwards;
-    /* forwards 表示最后一帧停止，否则会跳到第一帧 */
+/* 离场前 */
+.boss-text-exit{
+    opacity: 1;
 }
-
-
-@keyframes hide-item {
-    0% {
-        opacity: 1;
-        color: yellow;
-    }
-
-    50% {
-        opacity: 0.5;
-        color: red;
-    }
-
-    100% {
-        opacity: 0;
-        color: green;
-    }
+/* 离场到离场结束 */
+.boss-text-exit-active{
+    opacity: 0;
+    transition: opacity 2000ms;
 }
-
-
-@keyframes show-item {
-    0% {
-        opacity: 0;
-        color: yellow;
-    }
-
-    50% {
-        opacity: 0.5;
-        color: red;
-    }
-
-    100% {
-        opacity: 1;
-        color: green;
-    }
+/* 离场结束 */
+.boss-text-exit-done{
+    opacity: 0;
 }

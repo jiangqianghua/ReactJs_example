@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './css/anim.css'
+import { CSSTransition } from 'react-transition-group';
 
 class Anim extends Component {
     state = { 
@@ -8,7 +9,15 @@ class Anim extends Component {
     render() { 
         return (  
             <div>
-                <div className={this.state.isShow ? 'show' : 'hiden'}>boss任务</div>
+                {/* unmountOnExit 表示隐藏后自动删除改元素 */}
+                <CSSTransition
+                 in={this.state.isShow}
+                 timeout={2000}
+                 classNames="boss-text"
+                 unmountOnExit
+                >
+                    <div >boss任务</div>
+                </CSSTransition>
                 <div>
                     <button onClick={this.toToggole.bind(this)}>显示boss</button>
                 </div>

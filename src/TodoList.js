@@ -1,6 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import TodoItem from './TodoItem'
-import LiftSycle from './LifeCycle'
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
+
 
 class TodoList extends Component {
     constructor(pros) {
@@ -14,7 +15,6 @@ class TodoList extends Component {
         return (
             <Fragment>
                 <div>
-                    <LiftSycle></LiftSycle>
                     <label htmlFor="input_id">请输入文本</label>
                     <input id="input_id" value={this.state.inputValue}
                     onChange={this.inputChange.bind(this)}
@@ -22,19 +22,28 @@ class TodoList extends Component {
                     <button onClick={this.addList.bind(this)}>增加服务器</button>
                 </div>
                 <ul ref={(ul) => {this.ul = ul}}>
+                    <TransitionGroup>
                     {
                         this.state.list.map((item, index) => {
                             return (
+                                <CSSTransition
+                                timeout={2000}
+                                classNames='boss-text'
+                                unmountOnExit
+                                appear={true}
+                                key={index+item}
+                                >
                                 <TodoItem
                                  content={item} 
                                  index={index}
-                                 key={index+item}
                                  deleteItem={
                                     this.deleteItem.bind(this)
                                  }></TodoItem>
+                                 </CSSTransition>
                             )
                         })
                     }
+                    </TransitionGroup>
                 </ul>
             </Fragment>
         )
