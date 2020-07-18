@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types'
 class TodoItem extends Component {
     constructor(props) {
         super(props)
@@ -16,5 +16,14 @@ class TodoItem extends Component {
         this.props.deleteItem(this.props.index)
     }
 }
- 
+
+TodoItem.propTypes = {
+    content: PropTypes.string.isRequired,
+    index: PropTypes.number.isRequired,
+    deleteItem: PropTypes.func
+}
+
+TodoItem.defaultProps={
+    content: '默认值'
+}
 export default TodoItem;
