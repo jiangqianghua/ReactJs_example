@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
 import 'antd/dist/antd.css'
 import {Input, Button, List} from 'antd'
-const data = [
-    '11222333',
-    '33333333333',
-    '4444444444'
-]
+// import store from './store/index'
+import store from './store'
 
 class TodoList extends Component {
     state = {  }
+    constructor(props) {
+        super(props)
+        console.log(store.getState())
+        this.state = store.getState()
+    }
     render() { 
         return ( 
             <div style={{margin: '10px'}}>
                 <div>
                     <Input 
-                    placeholder="write something" 
+                    placeholder={this.state.inputValue}
                     style={{width: '250px', marginRight: '10px'}} />
 
                     <Button type="primary" > 增加</Button>
@@ -23,7 +25,7 @@ class TodoList extends Component {
                 <div style={{margin: '10px', width: '300px'}}>
                     <List
                         bordered
-                        dataSource={data}
+                        dataSource={this.state.list}
         renderItem={(item) => (<List.Item>{item}</List.Item>)}
                     ></List>
                 </div>
