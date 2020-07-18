@@ -1,11 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-// import LifeCycle from './LifeCycle'
-// import TextAxios from './TextAxios'
-import TodoList from './TodoList'
-// import Anim from './Anim'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TodoList from './TodoList';;
 
 ReactDOM.render(
     <TodoList />,
     document.getElementById('root')
-)
+);
