@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import AppRouter from './AppRouter'
+import Example from './Example'
+import HookExample from './HookExample'
 ReactDOM.render(
-    <AppRouter />,
+    <HookExample />,
     document.getElementById('root')
 );
