@@ -1,16 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import TodoList from './TodoList';
-import {Provider} from 'react-redux'
-import store from './store'
-
-//  把组件包裹在provider中
-const App = (
-    <Provider store={store}>
-        <TodoList />
-    </Provider>
-)
+import AppRouter from './AppRouter'
 ReactDOM.render(
-    App,
+    <AppRouter />,
     document.getElementById('root')
 );
