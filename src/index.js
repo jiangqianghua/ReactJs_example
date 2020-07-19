@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
-import HookExample from './HookExample'
+import Example from './Example'
 ReactDOM.render(
-    <HookExample />,
+    <Example />,
     document.getElementById('root')
 );

@@ -1,22 +1,16 @@
-import React, { Component } from 'react';
-
-class Example extends Component {
-    state = {  
-        count: 0
-    }
-    render() { 
-        return ( 
-            <div>
-                <p>you click {this.state.count} times</p>
-                <button onClick={this.addCount.bind(this)}>按钮</button>
-            </div>
-         );
-    }
-    addCount() {
-        this.setState({
-            count: this.state.count + 1
-        });
-    }
+import React, { useReducer } from 'react';
+import Buttons from './Buttons'
+import ShowArea from './ShowArea'
+import {Color} from './color'
+function Example() {
+    return (
+        <div>
+            <Color>
+                <ShowArea></ShowArea>
+                <Buttons></Buttons>
+            </Color>
+        </div>
+    )
 }
- 
-export default Example;
+
+export default Example
