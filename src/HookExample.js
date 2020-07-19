@@ -1,18 +1,21 @@
-import React, { useState, createContext, useContext } from 'react';
-const CountContext = createContext();
-function Counter() {
-    let count = useContext(CountContext)
-    return (<h2>{count}</h2>)
-}
+import React, { useReducer } from 'react';
+
 function HookExample() {
-    const [count, setCount] = useState(10)
+    const [count, dispatch] = useReducer((state, action) => {
+        switch(action.type) {
+            case 'add':
+                return state + 1
+            case 'sub':
+                return state -1
+            default:
+                return state
+        } 
+    }, 10)
     return (
         <div>
-            <p>ypu click {count} times</p>
-            <button onClick={() => {setCount(count+1)}}>Click me</button>
-            <CountContext.Provider value={count}>
-                <Counter></Counter>
-            </CountContext.Provider>
+           <h2>现在分数是 {count}</h2>
+           <button onClick={()=>{dispatch({type: 'add'})}}>add</button>
+           <button onClick={()=>{dispatch({type: 'sub'})}}>add</button>
         </div>
     )
 }
